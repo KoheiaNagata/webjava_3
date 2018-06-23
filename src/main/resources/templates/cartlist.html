@@ -1,0 +1,47 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+		<title>カート</title>
+	</head>
+	<body>
+		<h1>カート</h1>
+		<form action="#" th:action="@{/cartlist}" th:object="${CartListForm}" method="post">
+			<table class="table-sm table-striped table-hover" >
+				<thead  class="thead-light">
+				<tr>
+					<th>名前</th>
+					<th>価格</th>
+					<th>個数</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="item, stat : ${items}">
+					<td>
+						<span th:text="${item.itemName}"></span>
+						<input type="hidden" th:name="|itemList[${stat.index}].itemId|" th:value="${item.itemName}" />
+					</td>
+					<td>
+						<span th:text="${item.price}"></span>
+						<input type="hidden" th:name="|itemList[${stat.index}].itemName|" th:value="${item.price}" />
+					</td>
+					<td>
+						<span th:text="${item.itemCount}"></span>
+						<input type="hidden" th:name="|itemList[${stat.index}].price|" th:value="${item.itemCount}" />
+					</td>
+					<td>
+						<a href="" th:href="@{/deletecart(cart_id=${item.cartId})}" >削除</a>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+			<br>
+			<input type="button" onclick="location.href='/itemlist'"value="商品一覧に戻る"class="btn">
+			<br>
+		</form>
+
+
+	</body>
+</html>
